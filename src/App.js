@@ -8,32 +8,37 @@ class App extends Component {
     super();
 
     this.state = {
-      name: 'James'
+      name: { firstName: 'Prince', lastName: 'Nwaonicha' },
+      company: 'Google'
     }
   }
-  
+
   render() {
-    function ChangeName() {
-      let p = document.querySelector('p')
-      if (p.innerText === 'James') {
-        this.setState({name: 'Megaman'})
-      } else {
-        p.innerText = 'James'
-      }
-  }
     return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {this.state.name}
-        </p>
-          <button onClick={ChangeName}>Change Name</button>
-      </header>
-    </div>
-  );
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p id='Name'>
+            {this.state.name.firstName} {this.state.name.lastName}
+          </p>
+          <p id='Company'>{this.state.company}</p>
+          <button onClick={() => {
+            this.setState( // proper way to build set state
+              () => {
+                return {
+                  name: { firstName: 'James', lastName: 'Nwaonicha' }
+                }
+              },
+              () => { // this is not needed but could be used.
+                console.log(this.state);
+              }
+            );
+          }}>Change Name</button>
+        </header>
+      </div>
+    );
   }
-  
+
 }
 
 export default App;
